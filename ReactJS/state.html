@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<div id="test"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script type="text/babel">
+    class Tst extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                status: false,
+            };
+            this.change = this.change.bind(this);
+        }
+
+        change() {
+            const status = !this.state.status;
+            this.setState({status})
+        };
+
+        render() {
+            const {status} = this.state;
+            return <h2 onClick={this.change}>{status ? "测试" : "测试中"}</h2>
+        }
+    }
+
+    ReactDOM.render(<Tst/>, document.getElementById("test"))
+</script>
+</body>
+</html>

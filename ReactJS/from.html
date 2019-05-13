@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+    class Login extends React.Component{
+        constructor(props) {
+            super(props);
+            this.state = {
+                pwd:'',
+            }
+            this.handleSumbit = this.handleSumbit.bind(this);
+            this.handlePwd = this.handlePwd.bind(this);
+        }
+
+        handleSumbit(event){
+            const name =  this.refs.name.value;
+            alert(`用户名${name}${this.state.pwd}`)
+            event.preventDefault()
+        }
+        handlePwd(event){
+            const pwd = event.target.value;
+            this.setState({
+                pwd
+            })
+        }
+        render(){
+            return(
+                <div>
+                    <form action="/" onSubmit={this.handleSumbit}>
+                        用户名：<input type="text" ref={input => this.name = input}/>
+                        <br/>
+                        密码：<input type="password" value={this.state.pwd} onChange={this.handlePwd}/>
+                        <input type="submit" value="登录"/>
+                    </form>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Login/>,document.getElementById("test"))
+</script>
+</body>
+</html>

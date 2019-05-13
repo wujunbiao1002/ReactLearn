@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                totleList:[
+                    "shuijiao","qqq"
+                ]
+            }
+            this.addtotleList = this.addtotleList.bind(this);
+        }
+        addtotleList(totle){
+            const  {totleList} =this.state;
+            totleList.unshift(totle);
+            this.setState({
+                totleList
+            })
+        }
+        render() {
+            return (
+                <div>
+                    <h1>多个组件联合</h1>
+                    <Add count={this.state.totleList.length} addtotleList={this.addtotleList}/>
+                    <List totleList = {this.state.totleList}/>
+                </div>
+            )
+        }
+    }
+
+    class Add extends React.Component {
+        constructor(props) {
+            super(props);
+            this.add = this.add.bind(this);
+        }
+        add (){
+            const todo = this.input.value.trim();
+            if (!todo) {
+                return
+            }
+            this.props.addtotleList(todo)
+        }
+
+        render() {
+            return (
+                <div>
+                    <input type="text" ref = {input => this.input = input}/>
+                    <button onClick={this.add}>count  {this.props.count}</button>
+                </div>
+            )
+        }
+/*        static propTypes = {
+            count: PropTypes.number.isRequired,
+            addtotleList: PropTypes.func.isRequired
+        };*/
+    }
+    Add.propTypes = {
+        count: PropTypes.number.isRequired,
+        addtotleList: PropTypes.func.isRequired
+    };
+    class List extends React.Component {
+        render() {
+            // console.log(this.props);
+            return (
+                <div>
+                    <ul>
+                        {
+                            this.props.totleList.map((item, index)=>
+                                <li key={index}>{index+1}.{item}</li>
+                            )
+                        }
+                    </ul>
+                </div>
+            )
+        }
+        static  propTypes = {
+            totleList: PropTypes.array.isRequired,
+        };
+    }
+
+    ReactDOM.render(<App />, document.getElementById("test"))
+</script>
+</body>
+</html>

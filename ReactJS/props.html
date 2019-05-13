@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="test"></div>
+<div id="test2"></div>
+<div id="test3"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+
+<script type="text/babel">
+    /*    function Person(props) {
+            return (<ul>
+                <li>{props.name}</li>
+                <li>{props.age}</li>
+            </ul>)
+        }
+        Person.defaultProps = {
+            age:"13"
+        };
+
+        const p1 = {
+            name: 'as',
+            age: '12'
+        };
+        ReactDOM.render(<Person name={p1.name} age={p1.age}/>, document.getElementById("test"))
+        const p2 = {
+            name: 'qwe',
+        };
+
+        ReactDOM.render(<Person name={p2.name} />, document.getElementById("test2"))
+        ReactDOM.render(<Person {...p1} />, document.getElementById("test3"))*/
+    const p1 = {
+        name: 'as',
+        age: '12'
+    };
+    class NewWelcome extends React.Component{
+        render(){
+            return <h1>Hello, {this.props.name}</h1>;
+        }
+    }
+
+    class REE extends React.Component {
+
+        constructor(props){
+            super(props);
+        }
+
+        render() {
+            console.log(this.props);
+            return (
+                <ul>
+                    <li>{this.props.name}</li>
+                </ul>
+            )
+        }
+    }
+    ReactDOM.render(<NewWelcome name={p1.name}/>,document.getElementById("test"))
+    ReactDOM.render(<REE {...p1}/>,document.getElementById("test2"))
+</script>
+</body>
+</html>

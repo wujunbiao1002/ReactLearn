@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script type="text/babel">
+    class Left extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                opacity: 1,
+            };
+            this.distroyComponent = this.distroyComponent.bind(this);
+        }
+
+        componentDidMount() {
+            let {opacity} = this.state;
+            this.id = setInterval(function () {
+                console.log("定时器");
+                opacity -= 0.1
+                if (opacity <= 0) {
+                    opacity = 1
+                }
+                this.setState({
+                    opacity
+                })
+            }.bind(this), 200)
+        }
+
+        distroyComponent(){
+            ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+        }
+
+        componentWillUnmount(){
+            clearInterval(this.id);
+        }
+
+        render() {
+            const {opacity} = this.state;
+            return (
+                <div>
+                    <h1 style={{opacity}}>asdf</h1>
+                    <button onClick={this.distroyComponent}>去除</button>
+                </div>
+            )
+        }
+
+    }
+
+    ReactDOM.render(<Left/>, document.getElementById("test"))
+</script>
+</body>
+</html>

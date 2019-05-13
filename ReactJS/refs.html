@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+
+<script src="js/babel.min.js"></script>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script type="text/babel">
+    class Test extends React.Component{
+        constructor(porps){
+            super(porps);
+            this.show = this.show.bind(this);
+            this.show1 = this.show1.bind(this);
+        }
+        show(){
+            console.log(this.refs);
+            const input = this.refs.content;
+            alert(input.value)
+            alert(this.input.value)
+        }
+        show1(event){
+            alert(event.target.value)
+        }
+        render(){
+            return(
+                <div>
+                    <input type="text" ref = "content"/>
+                    <input type="text" ref = {input => this.input = input}/>
+                    <button onClick={this.show}>提示</button>
+                    <input type="text" placeholder="提示" onBlur={this.show1}/>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Test/>, document.getElementById("test"))
+</script>
+</body>
+</html>
