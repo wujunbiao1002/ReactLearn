@@ -1,2 +1,2 @@
-# ReactLearn
-对于React的学习实操
+# react-learning
+React框架学习实际
