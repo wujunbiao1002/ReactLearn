@@ -1,2 +1,2 @@
-# react
-react框架学习实践
+# reactjs
+reactjs库学习实践
